@@ -1,15 +1,36 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class FibonacciMultiplicationApp {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+import java.math.BigInteger;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.DriverManager;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+
+public class FibonacciMultiplicationApp {
+
+    // ajustar segun su entorno
+
+    private static final String DB_URL = "jdbc:oracle:thin:@//localhost:1521/orcl";
+    private static final String DB_USER = "system";
+    private static final String DB_PASSWORD = "Tapiero123";
+
+    public static void main(String[] args) {
+
+        final int TOTAL_NUMBERS = 15;
+        int[] fibonacci = new int[TOTAL_NUMBERS];
+
+        // valores iniciales de 4 digitos .
+        for (int i = 2; i < TOTAL_NUMBERS; i++) {
+            fibonacci[i] = fibonacci[i - 1] + fibonacci[i - 2];
+            fibonacci[i] = normalizeToFourDigits(fibonacci[i]);
         }
+    }
+
+    private static int normalizeToFourDigits(int value) {
+        while (value > 9999) {
+            value /= 10;
+        }
+        if (value < 1000) {
+            value += 1000;
+        }
+        return value;
     }
 }
