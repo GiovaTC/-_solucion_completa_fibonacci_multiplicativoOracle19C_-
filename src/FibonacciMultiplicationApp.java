@@ -22,6 +22,21 @@ public class FibonacciMultiplicationApp {
             fibonacci[i] = fibonacci[i - 1] + fibonacci[i - 2];
             fibonacci[i] = normalizeToFourDigits(fibonacci[i]);
         }
+
+        // multiplicacion total (BigInteger para evitar overflow)
+        BigInteger product = BigInteger.ONE;
+
+        System.out.println("Serie Fibonacci (4 digitos):");
+
+        for (int value : fibonacci) {
+            System.out.println(value + " ");
+            product = product.multiply(BigInteger.valueOf(value));
+        }
+
+        System.out.println("\n\nResultado de la multiplicacion:");
+        System.out.println(product);
+
+        //  registro en oracle .
     }
 
     private static int normalizeToFourDigits(int value) {
