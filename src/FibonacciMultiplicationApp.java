@@ -17,7 +17,11 @@ public class FibonacciMultiplicationApp {
         final int TOTAL_NUMBERS = 15;
         int[] fibonacci = new int[TOTAL_NUMBERS];
 
-        // valores iniciales de 4 digitos .
+        // Valores iniciales de 4 dígitos
+        fibonacci[0] = 1234;
+        fibonacci[1] = 2345;
+
+        // Generación Fibonacci ajustada a 4 dígitos
         for (int i = 2; i < TOTAL_NUMBERS; i++) {
             fibonacci[i] = fibonacci[i - 1] + fibonacci[i - 2];
             fibonacci[i] = normalizeToFourDigits(fibonacci[i]);
@@ -37,6 +41,7 @@ public class FibonacciMultiplicationApp {
         System.out.println(product);
 
         //  registro en oracle .
+        saveResultToDatabase(TOTAL_NUMBERS, product);
     }
 
     private static int normalizeToFourDigits(int value) {
@@ -47,5 +52,25 @@ public class FibonacciMultiplicationApp {
             value += 1000;
         }
         return value;
+    }
+
+    private static void saveResultToDatabase(int totalNumbers, BigInteger result) {
+
+        String sql = "{ call INSERT_FIBONACCI_PRODUCT(?,?) }";
+
+        try (Connection conn = DriverManager.getConnection(
+                DB_URL, DB_USER, DB_PASSWORD);
+             CallableStatement cs = conn.prepareCall(sql)) {
+
+            cs.setInt(1, totalNumbers);
+            cs.setBigDecimal(2, new java.math.BigDecimal(result));
+            cs.execute();
+
+            System.out.println("\nResultado registrado correctamente en oracle.");
+
+        } catch (Exception e) {
+            System.err.println("Error al registrar en la base de datos:");
+            e.printStackTrace();
+        }
     }
 }
