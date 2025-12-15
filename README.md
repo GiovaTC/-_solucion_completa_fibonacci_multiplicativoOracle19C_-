@@ -2,6 +2,8 @@
 
 <img width="1024" height="1024" alt="image" src="https://github.com/user-attachments/assets/7851c207-bedf-4172-890d-d380f59930c1" />  
 
+<img width="2555" height="1079" alt="image" src="https://github.com/user-attachments/assets/508bea53-dc8c-4894-8bd2-ad8790150a66" />    
+
 # Solución completa — Fibonacci Multiplicativo con Oracle 19c .
 
 Documento técnico en formato **Markdown**, listo para uso académico o profesional. La solución está desarrollada en **Java (consola)** y es **100% ejecutable en IntelliJ IDEA**.
